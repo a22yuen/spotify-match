@@ -22,7 +22,7 @@ module.exports = {
         yellow: colors.yellow,
         blue: colors.blue,
         // custom colors
-        "spotify-green": "#1DB954",
+        "spotify-green": "#1ED760",
       },
     },
   },

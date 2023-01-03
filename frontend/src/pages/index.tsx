@@ -3,6 +3,8 @@ import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "../../styles/Home.module.css";
 
+import { MainPage } from "../components/MainPage";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -15,9 +17,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div className="flex flex-row w-full bg-black rounded py-2 px-2 items-center justify-center ">
-          <p className="text-base text-spotify-green">Spotify Match</p>
-        </div>
+        <MainPage />
+        {/* <div className="flex flex-row w-full h-full bg-black rounded py-2 px-2 items-center justify-center ">
+          <p className="text-base text-spotify-green">Spotify Mdaadsadtch</p>
+        </div> */}
+
         {/* <div className={styles.description}>
           <p>
             Get started by editing&nbsp;

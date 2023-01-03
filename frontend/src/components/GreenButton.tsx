@@ -1,0 +1,17 @@
+import React from "react";
+
+interface Props {
+  children: React.ReactNode;
+  onClick: () => void;
+}
+
+export const GreenButton: React.FC<Props> = ({ children, onClick }) => {
+  return (
+    <button
+      className="btn btn-default bg-spotify-green px-4 py-2 rounded-2xl"
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+};
