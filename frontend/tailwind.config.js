@@ -22,6 +22,7 @@ module.exports = {
         yellow: colors.yellow,
         blue: colors.blue,
         // custom colors
+        "background-denim": "#236B27",
         "spotify-green": "#1ED760",
       },
     },
