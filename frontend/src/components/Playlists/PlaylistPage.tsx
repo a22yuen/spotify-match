@@ -1,8 +1,24 @@
 import React, { useEffect, useState, useContext } from "react";
 import { GreenButton } from "../GreenButton";
 import { AppContext } from "../../../context/AppContext";
+import { PlaylistItems } from "./PlayListItems";
 
 const NO_TOKEN = "NO_TOKEN";
+
+const dummy_items = [
+  {
+    name: "Inside Outside",
+    albumArt:
+      "https://upload.wikimedia.org/wikipedia/en/7/77/MacMillerFaces.jpg",
+    artist: "Mac Miller",
+  },
+  {
+    name: "Fly Me To the Moon",
+    albumArt: "https://i.ytimg.com/vi/ZEcqHA7dbwM/maxresdefault.jpg",
+    artist: "Frank Sinatra",
+  },
+];
+
 export const PlaylistPage = () => {
   const { user } = useContext(AppContext);
   useEffect(() => {
@@ -15,13 +31,7 @@ export const PlaylistPage = () => {
         Find your musical matches with your friends{" "}
       </div>
       <div className="h-10" />
-      <GreenButton
-        onClick={() => {
-          console.log("ayy");
-        }}
-      >
-        <p className="font-semibold">Compare Playlists</p>
-      </GreenButton>
+      <PlaylistItems items={dummy_items} />
     </div>
   );
 };

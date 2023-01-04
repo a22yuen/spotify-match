@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Header } from "./Header";
 import { GreenButton } from "../GreenButton";
 import { useRouter } from "next/router";
+import { loginUsers } from "../../api/api";
 
 const NO_TOKEN = "NO_TOKEN";
 export const MainPage = () => {
@@ -32,12 +33,13 @@ export const MainPage = () => {
       <div className="h-10" />
       <GreenButton
         onClick={() => {
-          console.log("ayy");
-          router.push("/playlists");
+          console.log("-ayy");
+          loginUsers();
+          // router.push("/playlists");
           window;
         }}
       >
-        <p className="font-semibold">Compare Playlists</p>
+        <p className="font-semibold">Compare Playlists JK LOGIN</p>
       </GreenButton>
     </div>
   );
