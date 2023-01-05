@@ -2,27 +2,12 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "../../styles/Home.module.css";
-import { useRouter } from "next/router";
 
 import { MainPage } from "../components/Main/MainPage";
-import { useEffect } from "react";
-import { useContext } from "react";
-import { AppContext } from "../../context/AppContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const router = useRouter()
-  const { token } = useContext(AppContext)
-
-  useEffect(() => {
-    const token = localStorage.getItem('token') ?? null
-    if (token){
-      console.log("==logged in", token)
-      router.push('/home')
-    }
-  }, [])
-
   return (
     <>
       <Head>
