@@ -20,14 +20,6 @@ const dummy_items = [
 ];
 
 const fetchPlaylists = async () => {
-  console.log(
-    JSON.stringify({
-      playlistA: "1PhIh9as2SfCG1YweNqmNW",
-      playlistB: "6FW87hw1HeyqjSbB23Si0h",
-      token:
-        "BQBTjpn5bPXQV74CjyP-p09KouB2aGMvvtOhCDif4nUicafvu4DOj9WpaHaJ9_UkPPMvs-jS_ys_OqwgS5GuirYQawdMbafdjX3YT931B1aZLardknmP3H0TIehU78A1OVp-SL-Rn7fN0Jl_3hoi6sGHYVyfQnlTbRBkDu2YJCQxlQwgCSfydCxrhbLpV1-2EtQ",
-    })
-  );
   const response = await fetch(
     // add a query param to the url to filter the playlist
     "https://vhb0e07ykd.execute-api.us-east-2.amazonaws.com/filter?mode=union",
