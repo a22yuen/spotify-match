@@ -13,15 +13,13 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const router = useRouter()
-  const { token } = useContext(AppContext)
-
-  useEffect(() => {
-    const token = localStorage.getItem('token') ?? null
-    if (token){
-      console.log("==logged in", token)
-      router.push('/home')
-    }
-  }, [])
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token')
+  //   if (token && token !== "epic token"){
+  //     console.log("==logged in", token)
+  //     router.push('/home')
+  //   }
+  // }, [])
 
   return (
     <>
