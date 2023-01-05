@@ -10,8 +10,9 @@ export const AppContext = createContext();
 
 export const AppProvider = (props) => {
   const [user, setUser] = useState(initialState);
+  const [token, setToken] = useState("NO_TOKEN");
   return (
-    <AppContext.Provider value={{ user, setUser }}>
+    <AppContext.Provider value={{ user, setUser, token, setToken }}>
       {props.children}
     </AppContext.Provider>
   );

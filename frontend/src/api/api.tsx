@@ -13,5 +13,5 @@ export const loginUsers = async () => {
 
   console.log("==response", parsed);
 
-  window.open(parsed.auth_url);
+  window.open(parsed.auth_url, "_self");
 };
