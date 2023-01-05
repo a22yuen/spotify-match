@@ -31,15 +31,16 @@ const fetchPlaylists = async () => {
     {
       method: "POST",
       mode: "cors",
+      credentials: 'same-origin',
       headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        'Accept': "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        'Content-Type': "application/json",
       },
       body: JSON.stringify({
         playlistA: "1PhIh9as2SfCG1YweNqmNW",
         playlistB: "6FW87hw1HeyqjSbB23Si0h",
-        token:
-          "BQBTjpn5bPXQV74CjyP-p09KouB2aGMvvtOhCDif4nUicafvu4DOj9WpaHaJ9_UkPPMvs-jS_ys_OqwgS5GuirYQawdMbafdjX3YT931B1aZLardknmP3H0TIehU78A1OVp-SL-Rn7fN0Jl_3hoi6sGHYVyfQnlTbRBkDu2YJCQxlQwgCSfydCxrhbLpV1-2EtQ",
+        token: localStorage.getItem('token')
       }),
     }
   );
