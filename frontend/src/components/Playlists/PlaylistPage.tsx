@@ -29,7 +29,8 @@ const fetchPlaylists = async () => {
     })
   );
   const response = await fetch(
-    "https://vhb0e07ykd.execute-api.us-east-2.amazonaws.com/filter",
+    // add a query param to the url to filter the playlist
+    "https://vhb0e07ykd.execute-api.us-east-2.amazonaws.com/filter?mode=union",
     {
       method: "POST",
       mode: "cors",
