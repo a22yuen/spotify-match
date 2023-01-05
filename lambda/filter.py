@@ -3,11 +3,13 @@ import requests
 
 
 def lambda_handler(event, context):
-    playlistA = event["body"]["playlistA"]
-    playlistB = event["body"]["playlistB"]
+
+    body = json.loads(event["body"])
+    playlistA = body["playlistA"]
+    playlistB = body["playlistB"]
     playlist_endpoint = "https://api.spotify.com/v1/playlists/{}?fields=tracks.items(track(name%2Cid))"
     headers = {
-        "Authorization": f"Bearer {event['body']['token']}"
+        "Authorization": f"Bearer {body['token']}"
     }
     response = requests.get(
         playlist_endpoint.format(playlistA), headers=headers)
@@ -25,6 +27,7 @@ def lambda_handler(event, context):
 
     return {
         'statusCode': 200,
+        'headers': {},
         'body': json.dumps({
             'playlistA': playlistA,
             'playlistB': playlistB,
