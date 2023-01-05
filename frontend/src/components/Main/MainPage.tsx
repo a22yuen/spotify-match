@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Header } from "./Header";
-import { GreenButton } from "../GreenButton";
+import { GreenButton } from "../common/GreenButton";
 import { useRouter } from "next/router";
 import { loginUsers } from "../../api/api";
 

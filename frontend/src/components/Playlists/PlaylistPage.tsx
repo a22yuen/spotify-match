@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { GreenButton } from "../GreenButton";
+import { GreenButton } from "../common/GreenButton";
 import { AppContext } from "../../../context/AppContext";
 import { PlaylistItems } from "./PlayListItems";
 

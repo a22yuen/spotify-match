@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { GreenButton } from "../GreenButton";
+import { GreenButton } from "../common/GreenButton";
 import { useRouter } from "next/router";
 import loadingGif from "../../../public/images/green-loader-2.gif"
 import { AppContext } from "../../../context/AppContext";

@@ -3,11 +3,11 @@ import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "../../styles/Home.module.css";
 
-import { MainPage } from "../components/Main/MainPage";
+import { HomePage } from "../components/Home/HomePage";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function Main() {
   return (
     <>
       <Head>
@@ -20,7 +20,7 @@ export default function Home() {
         <link rel="icon" href="/images/Spotify_icon_blend.png" />
       </Head>
       <main className={styles.main}>
-        <MainPage />
+        <HomePage />
       </main>
     </>
   );
