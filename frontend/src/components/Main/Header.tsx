@@ -1,5 +1,4 @@
 import React from "react";
-
 import logo from "../../../public/images/Spotify_icon_blend.png";
 
 export const Header = () => {

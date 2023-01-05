@@ -31,10 +31,10 @@ export const MainPage = () => {
       <div className="h-10" />
       <GreenButton
         onClick={() => {
-          console.log("-ayy");
-          // loginUsers();
+          const token = localStorage.getItem("token")
           console.log("link", login_url)
-          window.open(login_url, "_self")
+          console.log("==login_url")
+          window.open(login_url + (!token ? "&show_dialog=true" : "") , "_self")
           // router.push("/playlists");
         }}
       >

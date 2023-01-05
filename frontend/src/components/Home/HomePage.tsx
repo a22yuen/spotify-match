@@ -5,16 +5,21 @@ import { UserHeader } from "../common/UserHeader";
 
 export const HomePage = () => {
   const { user, setUser } = useContext(AppContext);
+
+  const fetchUser = async (token: string) => {
+    const response = await fetchUserData(token);
+    setUser(response);
+  };
+
   useEffect(() => {
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem('token')
     if (token){
-        console.log("==fetching")
-        setUser(fetchUserData(token))
+      fetchUser(token)
     }
-  }, []);
+  }, [])
+  
   return (
     <div className="flex flex-col w-full bg-gradient-to-b from-black via-black to-background-green items-center justify-center">
-        <p className="text-white">sdssssas</p>
         <UserHeader/>
     </div>
   );
