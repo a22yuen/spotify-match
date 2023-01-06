@@ -13,23 +13,22 @@ export const fetchUserData = async (token: string) => {
 };
 
 export const fetchPlaylistItems = async (token: string, playlist: string) => {
-  const playlistId = playlist.split("/")[4]?.split("?")[0];
-  if (!playlistId) {
-    return { error: "Invalid playlist URL" };
+  console.log("fetching playlist items");
+  try {
+    const response = await fetch(
+      `https://api.spotify.com/v1/playlists/${playlist}/tracks?fields=items(track(album(images)%2C%20artists(name)%2C%20name))`,
+      {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const parsed = await response.json();
+    return parsed?.items ?? [];
+  } catch (e) {
+    console.log("error fetching playlist items", e);
   }
-  console.log("==playlistId", playlistId);
-  const response = await fetch(
-    `https://api.spotify.com/v1/playlists/${playlistId}/tracks?fields=items(track(album(images)%2C%20artists(name)%2C%20name))`,
-    {
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  const parsed = await response.json();
-  console.log("==playlist items", parsed);
-  return parsed?.items ?? [];
 };
 
 export const fetchPlaylists = async (

@@ -47,14 +47,18 @@ export const PlaylistPage = () => {
   }, [playlistItemsA, playlistItemsB]);
 
   const searchPlaylist = async (playlistLetter: string, playlist: string) => {
-    if (playlistLetter === "A") {
-      const response = await fetchPlaylistItems(token, playlistA);
+    try {
+      const playlistId = playlist.split("/")[4]?.split("?")[0];
+      const response = await fetchPlaylistItems(token, playlistId);
       console.log("==response", response);
-      setPlaylistItemsA(response);
-    } else if (playlistLetter === "B") {
-      const response = await fetchPlaylistItems(token, playlistB);
-      console.log("==response", response);
-      setPlaylistItemsB(response);
+      if (playlistLetter === "A") {
+        setPlaylistItemsA(response);
+      } else if (playlistLetter === "B") {
+        setPlaylistItemsB(response);
+      }
+    } catch (e) {
+      console.log("Invalid playlist URL");
+      return;
     }
   };
 
@@ -118,17 +122,16 @@ export const PlaylistPage = () => {
         {renderColumnB()}
       </div>
       <div className="my-6">
-      <GreenButton
-        onClick={() => {
-          console.log("==click");
-          searchPlaylist("A", playlistA);
-          searchPlaylist("B", playlistB);
-        }}
-      >
-        <p className="text-base font-semibold">Match!</p>
-      </GreenButton>
+        <GreenButton
+          onClick={() => {
+            console.log("==click");
+            searchPlaylist("A", playlistA);
+            searchPlaylist("B", playlistB);
+          }}
+        >
+          <p className="text-base font-semibold">Match!</p>
+        </GreenButton>
       </div>
-
     </div>
   );
 };
