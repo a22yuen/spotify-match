@@ -23,6 +23,7 @@ module.exports = {
         blue: colors.blue,
         // custom colors
         "background-green": "#336b47",
+        "background-pink": "#ff63a4",
         "spotify-green": "#1ED760",
       },
     },

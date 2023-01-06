@@ -24,31 +24,63 @@ export const PlaylistPage = () => {
   const { user } = useContext(AppContext);
   const [playlistA, setPlaylistA] = useState("");
   const [playlistB, setPlaylistB] = useState("");
-  const [playlistItemsA, setPlaylistItemsA] = useState({});
-  const [playlistItemsB, setPlaylistItemsB] = useState({});
+  const [playlistItemsA, setPlaylistItemsA] = useState([]);
+  const [playlistItemsB, setPlaylistItemsB] = useState([]);
   const [token, setToken] = useState(NO_TOKEN);
 
   useEffect(() => {
-    console.log("==user", user);
+    // console.log("==user", user);
     const t = localStorage.getItem("token");
     if (t) {
       setToken(t);
     }
   }, []);
 
-  const searchPlaylist = (playlistLetter: string, playlist: string) => {
+  useEffect(() => {
+    // log both playlistItems
+    console.log("==========");
+    console.log("==playlistItemsA", playlistItemsA);
+    console.log("==playlistItemsB", playlistItemsB);
+    console.log("==playlistA", playlistA);
+    console.log("==playlistB", playlistB);
+    console.log("************");
+  }, [playlistItemsA, playlistItemsB]);
+
+  const searchPlaylist = async (playlistLetter: string, playlist: string) => {
     if (playlistLetter === "A") {
-      setPlaylistA(playlist);
-      setPlaylistItemsA(fetchPlaylistItems(token, playlistA));
+      const response = await fetchPlaylistItems(token, playlistA);
+      console.log("==response", response);
+      setPlaylistItemsA(response);
     } else if (playlistLetter === "B") {
-      setPlaylistB(playlist);
-      setPlaylistItemsB(fetchPlaylistItems(token, playlistB));
+      const response = await fetchPlaylistItems(token, playlistB);
+      console.log("==response", response);
+      setPlaylistItemsB(response);
     }
   };
 
+  const renderColumnA = () => {
+    return (
+      <div className="flex flex-col gap-2 w-full">
+        <div className="text-white py-2 text-lg"> Your Playlist </div>
+        <div className="flex flex-row gap-2">
+          <input
+            className="rounded text-white bg-black px-2 py-1 border-2 border-white w-full"
+            type="text"
+            placeholder="Playlist Name"
+            value={playlistA}
+            onChange={(e) => setPlaylistA(e.target.value)}
+          />
+        </div>
+        <div className="no-scrollbar h-96 overflow-y-auto rounded-lg">
+          {playlistItemsA && <PlaylistItems items={playlistItemsA} />}
+        </div>
+      </div>
+    );
+  };
+
   return (
-    <div className="flex flex-col w-full bg-gradient-to-b from-cyan-500 to-blue-500 items-center justify-center">
-      <div className="text-white py-2 text-lg">
+    <div className="flex flex-col w-full bg-gradient-to-b from-black via-black to-background-pink items-center">
+      <div className="text-white py-2 text-lg mt-32">
         {" "}
         Share songs with your friends{" "}
       </div>
@@ -61,33 +93,30 @@ export const PlaylistPage = () => {
       {
         //3 column div
       }
-      <div className="flex flex-row gap-2">
-        <div className="flex flex-col gap-2">
-          <div className="text-white py-2 text-lg"> Your Playlist </div>
-          <div className="flex flex-row gap-2">
-            <input
-              className="rounded"
-              type="text"
-              placeholder="Playlist Name"
-              value={playlistA}
-              onChange={(e) => searchPlaylist("A", e.target.value)}
-            />
-          </div>
-        </div>
-        <div className="flex flex-col gap-2">
+      <GreenButton
+        onClick={() => {
+          console.log("==click");
+          searchPlaylist("A", playlistA);
+          searchPlaylist("B", playlistB);
+        }}
+      >
+        Match!
+      </GreenButton>
+      <div className="flex flex-row w-3/4 px-32 gap-6 justify-between">
+        {renderColumnA()}
+        <div className="flex flex-col gap-2 w-full">
           <div className="text-white py-2 text-lg"> Friend's Playlist </div>
           <div className="flex flex-row gap-2">
             <input
-              className="rounded"
+              className="rounded text-white bg-black px-2 py-1 border-2 border-white w-full"
               type="text"
               placeholder="Playlist Name"
               value={playlistB}
-              onChange={(e) => searchPlaylist("B", e.target.value)}
+              onChange={(e) => setPlaylistB(e.target.value)}
             />
           </div>
         </div>
       </div>
-      <PlaylistItems items={dummy_items} />
     </div>
   );
 };

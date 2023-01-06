@@ -112,3 +112,8 @@ a {
     color-scheme: dark;
   }
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+

@@ -14,10 +14,10 @@ export const fetchUserData = async (token: string) => {
 
 export const fetchPlaylistItems = async (token: string, playlist: string) => {
   const playlistId = playlist.split("/")[4]?.split("?")[0];
-
   if (!playlistId) {
     return { error: "Invalid playlist URL" };
   }
+  console.log("==playlistId", playlistId);
   const response = await fetch(
     `https://api.spotify.com/v1/playlists/${playlistId}/tracks?fields=items(track(album(images)%2C%20artists(name)%2C%20name))`,
     {
@@ -28,7 +28,8 @@ export const fetchPlaylistItems = async (token: string, playlist: string) => {
     }
   );
   const parsed = await response.json();
-  return parsed;
+  console.log("==playlist items", parsed);
+  return parsed?.items ?? [];
 };
 
 export const fetchPlaylists = async (
