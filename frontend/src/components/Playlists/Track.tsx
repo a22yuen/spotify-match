@@ -4,15 +4,23 @@ interface Track {
   artists: { name: string }[];
 }
 
+
 export const Track = (props: { track: Track }) => {
+
+  const truncateText = (text : string) => {
+    if (text.length > 40) {
+      return text.substring(0, 40) + "..."
+    }
+    return text
+  }
   return (
-    <div className="flex flex-row px-2 py-2 bg-blue-500 rounded gap-2">
+    <div className="flex flex-row px-2 py-2 shadow-xl bg-spotify-gray shadow-inner rounded gap-2">
       <img
-        className="object-cover w-14 h-14 border-gray border-2 rounded"
+        className="object-cover w-14 h-14 rounded shadow-2xl shadow-black"
         src={props?.track?.album?.images?.[0]?.url}
       />
       <div className="flex flex-col">
-        <p className="text-white text-lg">{props?.track?.name}</p>
+        <p className="flex flex-row font-semibold text-white text-lg w-full text-ellipsis overflow-hidden">{truncateText(props?.track?.name)}</p>
         <p className="text-white text-base">{props?.track?.artists[0].name}</p>
       </div>
     </div>

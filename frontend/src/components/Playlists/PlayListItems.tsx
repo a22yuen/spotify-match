@@ -15,7 +15,7 @@ export const PlaylistItems = (props: { items: Item[] }) => {
     console.log("==items", props?.items)
   }, [props?.items])
   return (
-    <div className="flex flex-col py-4 px-4 gap-2 bg-black rounded-lg">
+    <div className="flex flex-col py-4 px-4 gap-2 bg-spotify-dark-gray rounded-lg">
       {props?.items?.map((item, index) => {
         return <Track track={item.track} key={index} />;
       })}

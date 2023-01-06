@@ -78,6 +78,26 @@ export const PlaylistPage = () => {
     );
   };
 
+  const renderColumnB = () => {
+    return (
+      <div className="flex flex-col gap-2 w-full">
+        <div className="text-white py-2 text-lg"> Friend's Playlist </div>
+        <div className="flex flex-row gap-2">
+          <input
+            className="rounded text-white bg-black px-2 py-1 border-2 border-white w-full"
+            type="text"
+            placeholder="Playlist Name"
+            value={playlistB}
+            onChange={(e) => setPlaylistB(e.target.value)}
+          />
+        </div>
+        <div className="no-scrollbar h-96 overflow-y-auto rounded-lg">
+          {playlistItemsB && <PlaylistItems items={playlistItemsB} />}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="flex flex-col w-full bg-gradient-to-b from-black via-black to-background-pink items-center">
       <div className="text-white py-2 text-lg mt-32">
@@ -93,6 +113,11 @@ export const PlaylistPage = () => {
       {
         //3 column div
       }
+      <div className="flex flex-row w-3/4 px-32 gap-6 justify-between">
+        {renderColumnA()}
+        {renderColumnB()}
+      </div>
+      <div className="my-6">
       <GreenButton
         onClick={() => {
           console.log("==click");
@@ -100,23 +125,10 @@ export const PlaylistPage = () => {
           searchPlaylist("B", playlistB);
         }}
       >
-        Match!
+        <p className="text-base font-semibold">Match!</p>
       </GreenButton>
-      <div className="flex flex-row w-3/4 px-32 gap-6 justify-between">
-        {renderColumnA()}
-        <div className="flex flex-col gap-2 w-full">
-          <div className="text-white py-2 text-lg"> Friend's Playlist </div>
-          <div className="flex flex-row gap-2">
-            <input
-              className="rounded text-white bg-black px-2 py-1 border-2 border-white w-full"
-              type="text"
-              placeholder="Playlist Name"
-              value={playlistB}
-              onChange={(e) => setPlaylistB(e.target.value)}
-            />
-          </div>
-        </div>
       </div>
+
     </div>
   );
 };
