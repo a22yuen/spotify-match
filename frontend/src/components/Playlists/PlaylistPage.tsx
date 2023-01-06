@@ -100,7 +100,7 @@ export const PlaylistPage = () => {
 
   return (
     <div className="flex flex-col w-full bg-gradient-to-b from-black via-black to-background-pink items-center">
-      <div className="text-white py-2 text-lg mt-32">
+      <div className="text-white font-semibold py-2 text-lg mt-32">
         {" "}
         Share songs with your friends{" "}
       </div>
