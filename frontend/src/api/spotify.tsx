@@ -24,10 +24,13 @@ export const fetchPlaylistItems = async (token: string, playlist: string) => {
         },
       }
     );
+    if (!response.ok) {
+      throw new Error("error fetching playlist items");
+    }
     const parsed = await response.json();
     return parsed?.items ?? [];
   } catch (e) {
-    console.log("error fetching playlist items", e);
+    console.log(e);
   }
 };
 
