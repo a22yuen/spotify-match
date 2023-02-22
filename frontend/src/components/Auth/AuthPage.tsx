@@ -13,7 +13,7 @@ export const AuthPage = () => {
       localStorage.setItem("token", token);
     }
     setTimeout(() => {
-      router.push("/home");
+      router.push("/playlists");
     }, 1000);
   }, [router]);
 

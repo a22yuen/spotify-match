@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { AppContext } from "../../../context/AppContext";
 import logo from "../../../public/images/Spotify_icon_blend.png";
 import { FiSettings } from "react-icons/fi";
-import { BiLogOut } from "react-icons/bi"
+import { BiLogOut } from "react-icons/bi";
 import { useRouter } from "next/router";
 
 export const UserHeader = () => {
@@ -26,31 +26,35 @@ export const UserHeader = () => {
   };
 
   useEffect(() => {
-    console.log("==dropdownOpen", dropdownOpen)
-  }, [dropdownOpen])
+    console.log("==dropdownOpen", dropdownOpen);
+  }, [dropdownOpen]);
 
   const toggleDropdown = () => {
-    const open = dropdownOpen
-    console.log("==open", open)
-    setDropdownOpen(!open)
-  }
+    const open = dropdownOpen;
+    console.log("==open", open);
+    setDropdownOpen(!open);
+  };
 
   const logOut = () => {
-    localStorage.setItem('token', "")
-    router.push("/")
-  }
+    localStorage.setItem("token", "");
+    router.push("/");
+  };
 
   const renderDropdown = () => {
-    return <div className="flex flex-col bg-black rounded border-white border-2 z-10 absolute right-12">
-        <div className="flex flex-row px-2 items-center gap-2 cursor-pointer" onClick={() => {
-            logOut()
-        }}>
-            <BiLogOut color={"white"} size={24}/>
-        <p className="text-white text-lg font-semi-bold">Logout</p>
+    return (
+      <div className="flex flex-col bg-black rounded border-white border-2 z-10 absolute right-12">
+        <div
+          className="flex flex-row px-2 items-center gap-2 cursor-pointer"
+          onClick={() => {
+            logOut();
+          }}
+        >
+          <BiLogOut color={"white"} size={24} />
+          <p className="text-white text-lg font-semi-bold">Logout</p>
         </div>
-
-    </div>
-  }
+      </div>
+    );
+  };
   const renderUser = () => {
     return (
       <div className="flex flex-row items-center">
@@ -71,8 +75,8 @@ export const UserHeader = () => {
           <div
             className="cursor-pointer"
             onClick={() => {
-                console.log("asd")
-                toggleDropdown()
+              console.log("asd");
+              toggleDropdown();
             }}
           >
             <FiSettings color="white" size={28} />
