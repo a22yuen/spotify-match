@@ -2,7 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import { GreenButton } from "../common/GreenButton";
 import { AppContext } from "../../../context/AppContext";
 import { PlaylistItems } from "./PlayListItems";
-import { fetchPlaylists, fetchPlaylistItems } from "../../api/spotify";
+import { fetchPlaylists, fetchPlaylistItems, fetchUserData } from "../../api/spotify";
+import { UserHeader } from "../common/UserHeader";
 
 const NO_TOKEN = "NO_TOKEN";
 
@@ -21,18 +22,24 @@ const dummy_items = [
 ];
 
 export const PlaylistPage = () => {
-  const { user } = useContext(AppContext);
+  const { user, setUser } = useContext(AppContext);
   const [playlistA, setPlaylistA] = useState("");
   const [playlistB, setPlaylistB] = useState("");
   const [playlistItemsA, setPlaylistItemsA] = useState([]);
   const [playlistItemsB, setPlaylistItemsB] = useState([]);
   const [token, setToken] = useState(NO_TOKEN);
 
+  const fetchUser = async (token: string) => {
+    const response = await fetchUserData(token);
+    setUser(response);
+  };
+
   useEffect(() => {
     // console.log("==user", user);
     const t = localStorage.getItem("token");
     if (t) {
       setToken(t);
+      fetchUser(t);
     }
   }, []);
 
@@ -104,6 +111,7 @@ export const PlaylistPage = () => {
 
   return (
     <div className="flex flex-col w-full bg-gradient-to-b from-black via-black to-background-pink items-center">
+      <UserHeader/>
       <div className="text-white font-semibold py-2 text-lg mt-32">
         {" "}
         Share songs with your friends{" "}
@@ -130,7 +138,16 @@ export const PlaylistPage = () => {
             searchPlaylist("B", playlistB);
           }}
         >
-          <p className="text-base font-semibold">Match!</p>
+          <p className="text-base font-semibold">Find</p>
+        </GreenButton>
+        <GreenButton
+          onClick={() => {
+            console.log("==click");
+            searchPlaylist("A", playlistA);
+            searchPlaylist("B", playlistB);
+          }}
+        >
+          <p className="text-base font-semibold">Similarities!</p>
         </GreenButton>
       </div>
     </div>
