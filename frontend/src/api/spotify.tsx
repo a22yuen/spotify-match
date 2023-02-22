@@ -34,9 +34,10 @@ export const fetchPlaylistItems = async (token: string, playlist: string) => {
   }
 };
 
-export const fetchPlaylists = async (
+export const fetchPlaylistResults = async (
   playlistA: string,
   playlistB: string,
+  mode: string,
   token: string
 ) => {
   const response = await fetch(
@@ -51,6 +52,7 @@ export const fetchPlaylists = async (
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        mode: mode,
         playlistA: playlistA,
         playlistB: playlistB,
       }),

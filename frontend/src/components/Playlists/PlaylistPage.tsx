@@ -3,27 +3,13 @@ import { GreenButton } from "../common/GreenButton";
 import { AppContext } from "../../../context/AppContext";
 import { PlaylistItems } from "./PlayListItems";
 import {
-  fetchPlaylists,
+  fetchPlaylistResults,
   fetchPlaylistItems,
   fetchUserData,
 } from "../../api/spotify";
 import { UserHeader } from "../common/UserHeader";
 
 const NO_TOKEN = "NO_TOKEN";
-
-const dummy_items = [
-  {
-    name: "Inside Outside",
-    albumArt:
-      "https://upload.wikimedia.org/wikipedia/en/7/77/MacMillerFaces.jpg",
-    artist: "Mac Miller",
-  },
-  {
-    name: "Fly Me To the Moon",
-    albumArt: "https://i.ytimg.com/vi/ZEcqHA7dbwM/maxresdefault.jpg",
-    artist: "Frank Sinatra",
-  },
-];
 
 export const PlaylistPage = () => {
   const { user, setUser } = useContext(AppContext);
@@ -40,23 +26,12 @@ export const PlaylistPage = () => {
   };
 
   useEffect(() => {
-    // console.log("==user", user);
     const t = localStorage.getItem("token");
     if (t) {
       setToken(t);
       fetchUser(t);
     }
   }, []);
-
-  useEffect(() => {
-    // log both playlistItems
-    console.log("==========");
-    console.log("==playlistItemsA", playlistItemsA);
-    console.log("==playlistItemsB", playlistItemsB);
-    console.log("==playlistA", playlistA);
-    console.log("==playlistB", playlistB);
-    console.log("************");
-  }, [playlistItemsA, playlistItemsB]);
 
   const searchPlaylist = async (playlistLetter: string, playlist: string) => {
     try {
@@ -69,13 +44,33 @@ export const PlaylistPage = () => {
         setPlaylistItemsB(response);
       }
     } catch (e) {
-      console.log("Invalid playlist URL");
+      console.log("Invalid search playlist URL", e);
       return;
     }
   };
 
-  //  const searchResults = async () => {
-  //   try {
+  const searchResults = async (
+    playlist1: string,
+    playlist2: string,
+    mode: string
+  ) => {
+    try {
+      const playlistId1 = playlist1.split("/")[4]?.split("?")[0];
+      const playlistId2 = playlist2.split("/")[4]?.split("?")[0];
+      const response = await fetchPlaylistResults(
+        playlistId1,
+        playlistId2,
+        mode,
+        token
+      );
+      console.log("==response", response);
+      setPlaylistResults(response.filtered);
+      return;
+    } catch (e) {
+      console.log("Invalid result playlist URL");
+      return;
+    }
+  };
 
   const renderColumnA = () => {
     return (
@@ -136,7 +131,7 @@ export const PlaylistPage = () => {
           />
         </div>
         <div className="no-scrollbar h-96 overflow-y-auto rounded-lg">
-          {playlistItemsB && <PlaylistItems items={playlistItemsB} />}
+          {playlistResults && <PlaylistItems items={playlistResults} />}
         </div>
       </div>
     );
@@ -169,12 +164,19 @@ export const PlaylistPage = () => {
       <div className="my-6">
         <GreenButton
           onClick={() => {
-            console.log("==click");
-            searchPlaylist("A", playlistA);
-            searchPlaylist("B", playlistB);
+            console.log("==click sim");
+            searchResults(playlistA, playlistB, "sim");
           }}
         >
           <p className="text-base font-semibold">Similarities</p>
+        </GreenButton>
+        <GreenButton
+          onClick={() => {
+            console.log("==click sim");
+            searchResults(playlistA, playlistB, "diff");
+          }}
+        >
+          <p className="text-base font-semibold">Differences</p>
         </GreenButton>
       </div>
     </div>
