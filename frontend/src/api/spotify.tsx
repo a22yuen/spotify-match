@@ -92,8 +92,15 @@ export const createPlaylist = async (
   const parsed = await response.json();
   const playlistId = parsed.id;
   const tracks = playlistItems.map((item) => "spotify:track:" + item.track.id);
-  const result = await addTrackToPlaylist(playlistId, tracks, token);
-  return result;
+  for(let i = 0; i < Math.ceil(tracks.length / 100); i++){
+    try{
+      const end = (i+1)*100 > tracks.length ? tracks.length : (i+1)*100;
+      console.log("tracks", tracks.slice(i*100, end))
+      await addTrackToPlaylist(playlistId, tracks.slice(i*100, end), token);
+    } catch (e) {
+      console.log("failed to add song to playlist: " + playlistId);
+    }
+  }
 };
 
 export const fetchPlaylistResults = async (
