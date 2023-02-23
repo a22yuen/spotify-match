@@ -9,7 +9,7 @@ export const MainPage = () => {
   const client_id = process.env.NEXT_PUBLIC_CLIENT_ID;
   const uri = process.env.NEXT_PUBLIC_REDIRECT_URI;
 
-  const login_url = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=code&redirect_uri=${uri}&scope=user-read-private%20user-read-email%20user-library-read`;
+  const login_url = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=code&redirect_uri=${uri}&scope=user-read-private%20user-read-email%20user-library-read%20playlist-modify-public`;
 
   useEffect(() => {
     if (typeof window !== "undefined") {

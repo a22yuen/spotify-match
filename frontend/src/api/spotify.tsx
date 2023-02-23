@@ -34,6 +34,34 @@ export const fetchPlaylistItems = async (token: string, playlist: string) => {
   }
 };
 
+export const createPlaylist = async (
+  playlistItems: any[],
+  userId: string,
+  name: string,
+  token: string
+) => {
+  console.log("creating playlist");
+  const response = await fetch(
+    `https://api.spotify.com/v1/users/${userId}/playlists`,
+    {
+      method: "POST",
+      mode: "cors",
+      credentials: "same-origin",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        description: "Created with Spotify Match",
+      }),
+    }
+  );
+  const parsed = await response.json();
+  return parsed;
+};
+
 export const fetchPlaylistResults = async (
   playlistA: string,
   playlistB: string,
