@@ -34,6 +34,37 @@ export const fetchPlaylistItems = async (token: string, playlist: string) => {
   }
 };
 
+const addTrackToPlaylist = async (
+  playlistId: string,
+  tracks: string[],
+  token: string
+) => {
+  console.log("adding tracks to playlist");
+  try {
+    const response = await fetch(
+      `https://api.spotify.com/v1/playlists/${playlistId}/tracks/`,
+      {
+        method: "POST",
+        mode: "cors",
+        credentials: "same-origin",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          uris: tracks,
+        }),
+      }
+    );
+    const parsed = await response.json();
+    return parsed;
+  } catch (e) {
+    console.log("failed to add song to playlist: " + playlistId);
+    console.log("erorr: " + e);
+  }
+};
+
 export const createPlaylist = async (
   playlistItems: any[],
   userId: string,
@@ -59,7 +90,10 @@ export const createPlaylist = async (
     }
   );
   const parsed = await response.json();
-  return parsed;
+  const playlistId = parsed.id;
+  const tracks = playlistItems.map((item) => "spotify:track:" + item.track.id);
+  const result = await addTrackToPlaylist(playlistId, tracks, token);
+  return result;
 };
 
 export const fetchPlaylistResults = async (

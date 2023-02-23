@@ -10,6 +10,7 @@ import {
 } from "../../api/spotify";
 import { UserHeader } from "../common/UserHeader";
 import { MdCancel } from "react-icons/md";
+import Modal from "react-modal";
 
 enum PlaylistType {
   mine,
@@ -17,6 +18,21 @@ enum PlaylistType {
   results,
 }
 const NO_TOKEN = "NO_TOKEN";
+
+const customStyles = {
+  overlay: {
+    background: "rgba(0, 0, 0, 0.6)",
+  },
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    backgroundColor: "black",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
 
 export const PlaylistPage = () => {
   const { user, setUser } = useContext(AppContext);
@@ -27,6 +43,7 @@ export const PlaylistPage = () => {
   const [playlistItemsB, setPlaylistItemsB] = useState([]);
   const [playlistResults, setPlaylistResults] = useState([]);
   const [token, setToken] = useState(NO_TOKEN);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const fetchUser = async (token: string) => {
     const response = await fetchUserData(token);
@@ -50,6 +67,7 @@ export const PlaylistPage = () => {
         token
       );
       console.log("==response", response);
+      setModalOpen(true);
       return;
     } catch (e) {
       console.log("Invalid result playlist URL");
@@ -138,17 +156,28 @@ export const PlaylistPage = () => {
     );
   };
 
-  // return (
-  //   <div className="flex flex-col h-screen">
-  //     <div className="h-20 bg-gray-300">Fixed height item 1</div>
-  //     <div className="flex-grow bg-gray-500">Expandable item 2</div>
-  //     <div className="h-20 bg-gray-300">Fixed height item 3</div>
-  //   </div>
-  // );
-
   return (
     <div className="flex flex-col h-screen w-full bg-gradient-to-b from-black via-black to-background-pink items-center">
       <div className="flex h-8 w-full bg-pink" />
+      <Modal
+        isOpen={modalOpen}
+        style={customStyles}
+        onRequestClose={() => {
+          setModalOpen(false);
+        }}
+      >
+        <div className="flex flex-col items-center bg-black">
+          <div className="text-white text-2xl font-semibold py-2">
+            {" "}
+            Playlist created!{" "}
+          </div>
+
+          <div className="text-white text-xl py-2">
+            {" "}
+            Check your spotify account for the new playlist{" "}
+          </div>
+        </div>
+      </Modal>
       <UserHeader />
       <div className="text-white font-semibold py-2 text-lg mt-2">
         {" "}
@@ -205,6 +234,7 @@ export const PlaylistPage = () => {
       <div className="flex flex-row my-6 gap-4">
         <GreenButton
           onClick={() => {
+            setModalOpen(false);
             console.log("==click sim");
             searchResults(urlA, urlB, "sim");
           }}

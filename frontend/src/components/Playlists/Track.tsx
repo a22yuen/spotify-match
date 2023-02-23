@@ -6,8 +6,8 @@ interface Track {
 
 export const Track = (props: { track: Track }) => {
   const truncateText = (text: string) => {
-    if (text.length > 20) {
-      return text.substring(0, 20) + "...";
+    if (text.length > 24) {
+      return text.substring(0, 24) + "...";
     }
     return text;
   };
