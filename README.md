@@ -1,7 +1,7 @@
 <p align="center"> <img src="https://user-images.githubusercontent.com/64274316/221059329-e3778a0e-31a8-4f42-9dcb-22185c113f99.png" height="150"/> </p>
 
 # Overview 
-Spotify Match is a music sharing website that lets you compare and match music with your friends to find new tracks together.
+🌟 Spotify Match is a music sharing website that lets you compare and match music with your friends to find new tracks together 🌟
 
 ## Login ⚙️
 
@@ -16,10 +16,10 @@ There are a few things we ask for when you log in:
 
 
 - View your Spotify Data
-    - This is to view your name, email, and public playlists
+    - This is to view your name and email for account security
 - View your activity on Spotify
-    - This is to see what you have in your Library so the site can access your tracks
-- Take Actions in Spotify on your behald
+    - This is to see the tracks in your Library to make playlists
+- Take Actions in Spotify on your behalf
     - This is so the site can create new custom playlists for you
 
 ## Comparing Playlists 🔀
@@ -63,7 +63,7 @@ Hit make playlist and Spotify Match will create the playlist under your account.
 
 # The Future 🔮
 
-- We have a recommendations system and a genre analysis tool currently in the works, for even more to compare with! 
+- We have a recommendations system and a genre analysis tool currently in the works, for even more tools to compare with! 
 - We're currently working hard to get Spotify Match approved by the official Spotify Dev team
     - Once this happens we won't be rate limited and login auth will be open for any Spotify Account. 
 - We're also happy to hear any suggestions. Please comment on the repo to let us know what features you want to see!
